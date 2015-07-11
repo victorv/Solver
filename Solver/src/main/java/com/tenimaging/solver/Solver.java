@@ -19,7 +19,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.EditText;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Button;
 import android.text.method.ScrollingMovementMethod;
@@ -28,26 +28,30 @@ import android.content.Context;
 
 public class Solver extends ActionBarActivity {
     private TextView textView;
-    private Button solveCircularButton, solveLinearButton;
-    private Button startNumberButton, endNumberButton;
-    private EditText startNumber, endNumber;
+    private Button solveCircularButton;
+    private NumberPicker startNumber, endNumber;
     private int startNum, endNum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_solver);
-
-        startNumberButton = (Button) findViewById(com.tenimaging.solver.R.id.button);
-        endNumberButton = (Button) findViewById(com.tenimaging.solver.R.id.button2);
-        startNumberButton.setEnabled(false);
-        endNumberButton.setEnabled(false);
+        setContentView(R.layout.solver);
 
         textView = (TextView) findViewById(com.tenimaging.solver.R.id.textView);
         textView.setMovementMethod(new ScrollingMovementMethod());
 
-        startNumber = (EditText) findViewById(com.tenimaging.solver.R.id.startText);
-        endNumber = (EditText) findViewById(com.tenimaging.solver.R.id.endText);
+        startNumber = (NumberPicker) findViewById(R.id.numberPickerStart);
+        endNumber = (NumberPicker) findViewById(R.id.numberPickerEnd);
+
+        startNumber.setMinValue(1);
+        startNumber.setMaxValue(24);
+        startNumber.setValue(1);
+        startNumber.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
+
+        endNumber.setMinValue(1);
+        endNumber.setMaxValue(24);
+        endNumber.setValue(16);
+        endNumber.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
     }
 
     @Override
@@ -72,37 +76,21 @@ public class Solver extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void solveCircular(View view) {
-        int startNum = Integer.parseInt(startNumber.getText().toString());
-        int endNum = Integer.parseInt(endNumber.getText().toString());
+    public void solve(View view) {
+        int startNum = startNumber.getValue();
+        int endNum = endNumber.getValue();
 
         textView.setText("");
         if (startNum == endNum) {
-            textView.append("Start must not equal End\n");
-            return;
-        }
-
-        if ((startNum < 1) || (endNum < 1)) {
-            textView.append("Start and End must be positive, non-zero\n");
-            return;
-        }
-
-        if ((startNum > 24) || (endNum > 24)) {
-            textView.append("Start and End must be smaller than 25\n");
+            textView.append("Start must not equal End.\n");
             return;
         }
 
         if (startNum > endNum) {
-            textView.append("Start must be less than End. Swapping numbers.\n");
             int temp;
             temp = startNum;
             startNum = endNum;
             endNum = temp;
-        }
-
-        if (view != null) {
-            InputMethodManager inputManager = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
-            inputManager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
         }
 
         com.tenimaging.solver.squarePairSolver.solve(textView, startNum, endNum);

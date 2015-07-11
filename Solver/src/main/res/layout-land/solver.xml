@@ -1,0 +1,90 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".Solver">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView"
+        android:scrollbars="vertical"
+        android:gravity="top"
+        android:textSize="14sp"
+        android:layout_below="@+id/scrollView"
+        android:layout_toRightOf="@+id/numberPickerStart"
+        android:layout_toLeftOf="@+id/numberPickerEnd"
+        android:layout_toStartOf="@+id/numberPickerEnd"
+        android:layout_above="@+id/textView2"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Solve"
+        android:id="@+id/button3"
+        android:focusable="true"
+        android:onClick="solve"
+        android:textSize="24sp"
+        android:minWidth="120dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Source code at http://github.com/victorv/Solver"
+        android:id="@+id/textView2"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="14sp"
+        android:autoLink="web"
+        android:minWidth="130dp"
+        android:textIsSelectable="false" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Solve"
+        android:id="@+id/button"
+        android:focusable="true"
+        android:onClick="solve"
+        android:textSize="24sp"
+        android:minWidth="120dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <NumberPicker
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/numberPickerEnd"
+        android:minWidth="130dp"
+        android:nestedScrollingEnabled="true"
+        android:clickable="true"
+        android:layout_above="@+id/button"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <NumberPicker
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/numberPickerStart"
+        android:minWidth="130dp"
+        android:nestedScrollingEnabled="true"
+        android:clickable="true"
+        android:layout_above="@+id/button3"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+</RelativeLayout>
